@@ -13,6 +13,7 @@
     import org.springframework.stereotype.Service;
 
     import java.util.List;
+    import java.util.stream.Collectors;
 
     @Service
     @AllArgsConstructor
@@ -41,8 +42,6 @@
             // 4. Convert the saved User entity back into a UserResponse DTO and return it
             return userMapper.toResponse(savedUser);
 
-
-
         }
         // ==========================================
         // 2. UPDATE
@@ -62,7 +61,7 @@
         public List<UserResponse> getAllUsers() {
             return userRepository.findAll().stream()
                     .map(userMapper::toResponse)
-                    .toList(); // or .collect(Collectors.toList()) for older Java versions
+                    .collect(Collectors.toList()); // or .collect(Collectors.toList()) for older Java versions
         }
 
         // get by id
